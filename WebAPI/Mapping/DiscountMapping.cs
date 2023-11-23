@@ -1,0 +1,19 @@
+﻿using AutoMapper;
+using EntityLayer.Dtos.CategoryDtos;
+using EntityLayer.Dtos.ContactDtos;
+using EntityLayer.Dtos.DiscountDtos;
+using EntityLayer.Entities;
+
+namespace WebAPI.Mapping
+{
+    public class DiscountMapping : Profile
+    {
+        public DiscountMapping()
+        {
+            CreateMap<Discount, DiscountDto>().ReverseMap();
+            CreateMap<Discount, CreateDiscountDto>().ReverseMap();
+            CreateMap<Discount, UpdateDiscountDto>().ReverseMap();
+            CreateMap<Discount, GetDiscountDto>().ReverseMap();
+        }
+    }
+}
