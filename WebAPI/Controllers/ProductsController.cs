@@ -18,6 +18,47 @@ namespace WebAPI.Controllers
             _productService = productService;
             _mapper = mapper;
         }
+        [HttpGet("productCount")]
+        public  IActionResult ProductCount()
+        {
+            return Ok(_productService.TGetProductCount());
+        }
+
+        [HttpGet("productAvgPrice")]
+        public IActionResult ProductAvgPrice()
+        {
+            return Ok(_productService.TGetProductAvgPrice());
+        }
+
+        [HttpGet("productPriceByElektronik")]
+        public IActionResult ProductPriceByElektronik()
+        {
+            return Ok(_productService.TGetProductPriceByElektronik());
+        }
+
+
+        [HttpGet("productNamebyMaxPrice")]
+        public IActionResult ProductNamebyMaxPrice()
+        {
+            return Ok(_productService.TGetProductNameByMaxPrice());
+        }
+
+        [HttpGet("productNamebyMinPrice")]
+        public IActionResult ProductNamebyMinPrice()
+        {
+            return Ok(_productService.TGetProductNameByMinPrice());
+        }
+
+        [HttpGet("productCountByElektronik")]
+        public IActionResult ProductCountByElektronik()
+        {
+            return Ok(_productService.TGetProductCountByCategoryName("Elektronik"));
+        }
+        [HttpGet("productCountByGiyim")]
+        public IActionResult ProductCountByGiyim()
+        {
+            return Ok(_productService.TGetProductCountByCategoryName("Giyim"));
+        }
 
         [HttpGet]
         public IActionResult ProductList()
@@ -32,7 +73,7 @@ namespace WebAPI.Controllers
             _productService.TAdd(product);
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
             var product = _productService.TGetById(id);
@@ -46,7 +87,7 @@ namespace WebAPI.Controllers
             _productService.TUpdate(product);
             return Ok();
         }
-        [HttpGet("getProduct")]
+        [HttpGet("{id}")]
         public IActionResult GetProduct(int id)
         {
             var value = _productService.TGetById(id);

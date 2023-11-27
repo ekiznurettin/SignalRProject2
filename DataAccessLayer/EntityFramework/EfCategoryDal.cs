@@ -10,5 +10,29 @@ namespace DataAccessLayer.EntityFramework
         public EfCategoryDal(SignalRContext context) : base(context)
         {
         }
+
+        public int GetActiveCategoryCount()
+        {
+            using (var context = new SignalRContext())
+            {
+                return context.Categories.Where(x => x.Status == true).Count();
+            }
+        }
+
+        public int GetCategoryCount()
+        {
+            using (var context= new SignalRContext())
+            {
+                return context.Categories.Count();
+            }
+        }
+
+        public int GetPassiveCategoryCount()
+        {
+            using (var context = new SignalRContext())
+            {
+                return context.Categories.Where(x => x.Status == false).Count();
+            }
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
             _contactService.TAdd(contact);
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteContact(int id)
         {
             var category = _contactService.TGetById(id);
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             _contactService.TUpdate(contact);
             return Ok();
         }
-        [HttpGet("getContact")]
+        [HttpGet("{id}")]
         public IActionResult GetContact(int id)
         {
             var value = _contactService.TGetById(id);

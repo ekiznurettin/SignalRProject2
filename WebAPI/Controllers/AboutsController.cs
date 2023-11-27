@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
             _aboutservice.TAdd(about);
             return Ok("Ekleme işlemi başarıyla gerçekleşti");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteAbout(int id)
         {
             var value = _aboutservice.TGetById(id);
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             _aboutservice.TDelete(about);
             return Ok("Güncelleme işlemi başarıyla gerçekleşti");
         }
-        [HttpGet("getAbout")]
+        [HttpGet("{id}")]
         public IActionResult GetAbout(int id)
         {
             var value = _aboutservice.TGetById(id);

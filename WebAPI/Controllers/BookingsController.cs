@@ -38,14 +38,14 @@ namespace WebAPI.Controllers
             _bookingService.TUpdate(booking);
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteBooking(int id)
         {
             var booking = _bookingService.TGetById(id);
             _bookingService.TDelete(booking);
             return Ok();
         }
-        [HttpGet("getBooking")]
+        [HttpGet("{id}")]
         public IActionResult GetBooking(int id)
         {
             var booking = _bookingService.TGetById(id);

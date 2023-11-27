@@ -3,9 +3,7 @@ using BusinessLayer.Abstract;
 using EntityLayer.Dtos.FeatureDtos;
 using EntityLayer.Dtos.SocialMediaDtos;
 using EntityLayer.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Update;
 
 namespace WebAPI.Controllers
 {
@@ -35,7 +33,7 @@ namespace WebAPI.Controllers
             _socialMediaService.TAdd(socialMedia);
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteSocialMedia(int id)
         {
             var feature = _socialMediaService.TGetById(id);
@@ -49,7 +47,7 @@ namespace WebAPI.Controllers
             _socialMediaService.TUpdate(socialMedia);
             return Ok();
         }
-        [HttpGet("getSocialMedia")]
+        [HttpGet("{id}")]
         public IActionResult GetSocialMedia(int id)
         {
             var value = _socialMediaService.TGetById(id);

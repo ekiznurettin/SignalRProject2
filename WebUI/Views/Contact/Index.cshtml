@@ -1,0 +1,45 @@
+﻿@model List<ResultContactDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Lokasyon</th>
+                                <th scope="col">Telefon</th>
+                                <th scope="col">Mail Adresi</th>
+                                <th scope="col">Açıklama</th>
+                                <th scope="col">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Location</td>
+                                    <td>@item.PhoneNumber</td>
+                                    <td>@item.Mail</td>
+                                    <td>@item.FooterDescription</td>
+                                    <td>
+                                        <a asp-controller="Contact" asp-action="DeleteContact" asp-route-id="@item.Id" class="btn btn-outline-danger">Sil</a>
+                                        <a asp-controller="Contact" asp-action="UpdateContact" asp-route-id="@item.Id" class="btn btn-outline-success">Güncelle</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a asp-controller="Contact" asp-action="CreateContact" class="btn btn-outline-primary">Ekle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

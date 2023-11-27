@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
             _testimonialService.TAdd(testimonial);
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteTestimonial(int id)
         {
             var feature = _testimonialService.TGetById(id);
@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
             _testimonialService.TUpdate(testimonial);
             return Ok();
         }
-        [HttpGet("getTestimonial")]
+        [HttpGet("{id}")]
         public IActionResult GetTestimonial(int id)
         {
             var value = _testimonialService.TGetById(id);

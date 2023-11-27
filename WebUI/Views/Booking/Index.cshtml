@@ -1,0 +1,47 @@
+﻿@model List<ResultBookingDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Kategori Adı</th>
+                                <th scope="col">Telefon</th>
+                                <th scope="col">Mail</th>
+                                <th scope="col">Personel Sayısı</th>
+                                <th scope="col">Tarih</th>
+                                <th scope="col">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.Mail</td>
+                                    <td>@item.PersonCount</td>
+                                    <td>@item.Date.ToShortDateString()</td>
+                                    <td>
+                                        <a asp-controller="Booking" asp-action="DeleteCBooking" asp-route-id="@item.Id" class="btn btn-outline-danger">Sil</a>
+                                        <a asp-controller="Booking" asp-action="UpdateBooking" asp-route-id="@item.Id" class="btn btn-outline-success">Güncelle</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a asp-controller="Booking" asp-action="CreateBooking" class="btn btn-outline-primary">Ekle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

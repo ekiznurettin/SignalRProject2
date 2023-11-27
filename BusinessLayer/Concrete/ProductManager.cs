@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
+using EntityLayer.Dtos.ProductDtos;
 using EntityLayer.Entities;
 
 namespace BusinessLayer.Concrete
@@ -33,7 +34,37 @@ namespace BusinessLayer.Concrete
            return _productDal.GetById(id);
         }
 
-        public List<Product> TGetProductsWithCategories()
+        public decimal TGetProductAvgPrice()
+        {
+           return _productDal.GetProductAvgPrice();
+        }
+
+        public int TGetProductCount()
+        {
+            return _productDal.GetProductCount();
+        }
+
+        public int TGetProductCountByCategoryName(string categoryName)
+        {
+            return _productDal.GetProductCountByCategoryName(categoryName);
+        }
+
+        public string TGetProductNameByMaxPrice()
+        {
+            return _productDal.GetProductNameByMaxPrice();
+        }
+
+        public string TGetProductNameByMinPrice()
+        {
+            return _productDal.GetProductNameByMinPrice();
+        }
+
+        public decimal TGetProductPriceByElektronik()
+        {
+          return _productDal.GetProductPriceByElektronik();
+        }
+
+        public List<ProductDto> TGetProductsWithCategories()
         {
             return _productDal.GetProductsWithCategories();
         }

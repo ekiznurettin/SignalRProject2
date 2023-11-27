@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
 using EntityLayer.Dtos.FeatureDtos;
-using EntityLayer.Dtos.ProductDtos;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+	[Route("api/[controller]")]
     [ApiController]
     public class FeaturesController : ControllerBase
     {
@@ -33,7 +32,7 @@ namespace WebAPI.Controllers
             _featureService.TAdd(feature);
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteFeature(int id)
         {
             var feature = _featureService.TGetById(id);
@@ -47,7 +46,7 @@ namespace WebAPI.Controllers
             _featureService.TUpdate(feature);
             return Ok();
         }
-        [HttpGet("getFeature")]
+        [HttpGet("{id}")]
         public IActionResult GetFeature(int id)
         {
             var value = _featureService.TGetById(id);

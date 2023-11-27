@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
             _discountService.TAdd(discount);
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteDiscount(int id)
         {
             var category = _discountService.TGetById(id);
@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
             _discountService.TUpdate(discount);
             return Ok();
         }
-        [HttpGet("getDiscount")]
+        [HttpGet("{id}")]
         public IActionResult GetDiscount(int id)
         {
             var value = _discountService.TGetById(id);

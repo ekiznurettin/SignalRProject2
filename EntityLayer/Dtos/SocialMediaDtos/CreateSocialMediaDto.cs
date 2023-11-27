@@ -2,8 +2,8 @@
 {
     public class CreateSocialMediaDto
     {
-        public int Title { get; set; }
-        public int Url { get; set; }
-        public int Icon { get; set; }
+        public string Title { get; set; }
+        public string Url { get; set; }
+        public string Icon { get; set; }
     }
 }

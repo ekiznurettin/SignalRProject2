@@ -7,7 +7,7 @@ namespace DataAccessLayer.Concrete.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SignalRDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            optionsBuilder.UseSqlServer("Data Source=Ekiz;Initial Catalog=SignalRDb;Integrated Security=True;TrustServerCertificate=True;");
         }
         public DbSet<About> Abouts{ get; set; }
         public DbSet<Booking> Bookings{ get; set; }
@@ -18,5 +18,9 @@ namespace DataAccessLayer.Concrete.Contexts
         public DbSet<Product> Products{ get; set; }
         public DbSet<SocialMedia> SocialMedias{ get; set; }
         public DbSet<Testimonial> Testimonials{ get; set; }
+        public DbSet<Order> Orders{ get; set; }
+        public DbSet<OrderDetail> OrderDetails{ get; set; }
+        public DbSet<MoneyCase> MoneyCases{ get; set; }
+        public DbSet<MenuTable> MenuTables{ get; set; }
     }
 }

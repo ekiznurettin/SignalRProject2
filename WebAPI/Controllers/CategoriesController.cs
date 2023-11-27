@@ -18,6 +18,28 @@ namespace WebAPI.Controllers
             _categoryService = categoryService;
             _mapper = mapper;
         }
+
+        [HttpGet("categoryCount")]
+        public IActionResult CategoryCount()
+        {
+            var values =  _categoryService.TGetCategoryCount();
+            return Ok(values);
+        }
+
+        [HttpGet("activeCategoryCount")]
+        public IActionResult ActiveCategoryCount()
+        {
+            var values = _categoryService.TGetActiveCategoryCount();
+            return Ok(values);
+        }
+
+        [HttpGet("passiveCategoryCount")]
+        public IActionResult PassiveCategoryCount()
+        {
+            var values = _categoryService.TGetPassiveCategoryCount();
+            return Ok(values);
+        }
+
         [HttpGet]
         public IActionResult CategoryList()
         {
@@ -31,7 +53,7 @@ namespace WebAPI.Controllers
             _categoryService.TAdd(category);
             return Ok();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
         {
             var category = _categoryService.TGetById(id);
@@ -45,7 +67,7 @@ namespace WebAPI.Controllers
             _categoryService.TUpdate(category);
             return Ok();
         }
-        [HttpGet("getCategory")]
+        [HttpGet("{id}")]
         public IActionResult GetCategory(int id)
         {
             var value = _categoryService.TGetById(id);
