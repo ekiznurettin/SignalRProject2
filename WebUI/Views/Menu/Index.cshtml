@@ -133,6 +133,7 @@
         function showProductId(value) {
             var id = value; $.ajax({
                 type: 'post',
+                url:"/Menu/CreateBasket/"
                 data: { item: id },
                 contentType: 'json',
                 success: function () {
