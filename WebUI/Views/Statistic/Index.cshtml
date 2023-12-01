@@ -13,7 +13,6 @@
     <div class="container-fluid">
         <script type="text/javascript">
             $(document).ready(() => {
-
                 var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7039/signalrhub").build();
                 $("#connstatus").text(connection.state);
 
@@ -25,8 +24,6 @@
                 }).catch((err) => {
                     console.log(err)
                 });
-
-
                 connection.on("ReceiveCategoryCount", (value) => {
                     $("#categoryCount").text(value)
                 });
@@ -39,7 +36,6 @@
                 connection.on("ReceivePassiveCategoryCount", (value) => {
                     $("#passiveCategorycount").text(value)
                 });
-
                 connection.on("ReceiveProductPriceByElektronik", (value) => {
                     $("#productPriceByElektronik").text(value)
                 });
@@ -49,7 +45,27 @@
                 connection.on("ReceiveProductCountByGiyim", (value) => {
                     $("#productCountByGiyim").text(value)
                 });
-             
+                connection.on("ReceiveProductAvgPrice", (value) => {
+                    $("#productAvgPrice").text(value)
+                });
+                connection.on("ReceiveTotalOrderCount", (value) => {
+                    $("#totalOrderCount").text(value)
+                }); 
+                connection.on("ReceiveActiveOrderCount", (value) => {
+                    $("#activeOrderCount").text(value)
+                }); 
+                connection.on("ReceivePassiveOrderCount", (value) => {
+                    $("#passiveOrderCount").text(value)
+                });
+                connection.on("ReceiveLastOrderPrice", (value) => {
+                    $("#lastOrderPrice").text(value)
+                }); 
+                connection.on("ReceiveTotalMoneyCaseAmount", (value) => {
+                    $("#totalMoneyCaseAmount").text(value)
+                });
+                connection.on("ReceiveTodayTotalPrice", (value) => {
+                    $("#todayTotalPrice").text(value)
+                });   
             })
         </script>
         <h4 class="page-title">Anlık İstatistik</h4>
@@ -200,8 +216,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
+                                    <p class="card-category">Ortalama Fiyat</p>
+                                    <h4 class="card-title" id="productAvgPrice">576</h4>
                                 </div>
                             </div>
                         </div>
@@ -221,8 +237,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Visitors</p>
-                                    <h4 class="card-title">1,294</h4>
+                                    <p class="card-category">En Pahalı Ürün</p>
+                                    <h4 class="card-title" id="productNameByMaxPrice"></h4>
                                 </div>
                             </div>
                         </div>
@@ -240,8 +256,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Sales</p>
-                                    <h4 class="card-title">$ 1,345</h4>
+                                    <p class="card-category">En Ucuz Ürün</p>
+                                    <h4 class="card-title" id="productNameByMinPrice"></h4>
                                 </div>
                             </div>
                         </div>
@@ -259,8 +275,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Subscribers</p>
-                                    <h4 class="card-title">1303</h4>
+                                    <p class="card-category">Toplam Sipariş</p>
+                                    <h4 class="card-title" id="totalOrderCount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -278,8 +294,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
+                                    <p class="card-category">Aktif Sipariş</p>
+                                    <h4 class="card-title" id="activeOrderCount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -299,8 +315,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Visitors</p>
-                                    <h4 class="card-title">1,294</h4>
+                                    <p class="card-category">Pasif Sipariş</p>
+                                    <h4 class="card-title" id="passiveOrderCount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -318,8 +334,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Sales</p>
-                                    <h4 class="card-title">$ 1,345</h4>
+                                    <p class="card-category">Son Sipariş Tutarı</p>
+                                    <h4 class="card-title" id="lastOrderPrice"></h4>
                                 </div>
                             </div>
                         </div>
@@ -337,8 +353,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Subscribers</p>
-                                    <h4 class="card-title">1303</h4>
+                                    <p class="card-category">Kasadaki Tutar</p>
+                                    <h4 class="card-title" id="totalMoneyCaseAmount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -356,8 +372,8 @@
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
+                                    <p class="card-category">Bugünkü Sipariş</p>
+                                    <h4 class="card-title" id="todayTotalPrice"></h4>
                                 </div>
                             </div>
                         </div>

@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
-using EntityLayer.Dtos.FeatureDtos;
 using EntityLayer.Dtos.TestimonialDtos;
 using EntityLayer.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -24,7 +22,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult TestimonialList()
         {
-            var values = _mapper.Map<List<FeatureDto>>(_testimonialService.TGetAll());
+            var values = _mapper.Map<List<TestimonialDto>>(_testimonialService.TGetAll());
             return Ok(values);
         }
         [HttpPost]

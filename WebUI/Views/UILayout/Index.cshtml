@@ -1,0 +1,29 @@
+﻿
+
+@{
+    Layout = null;
+    // UI Layout
+}
+<!DOCTYPE html>
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeadComponentPartial")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_UINavbarComponentPartial")
+
+
+    <!-- book section -->
+    <div class="hero_area">
+        @RenderBody()
+    </div>
+    <!-- end book section -->
+    <!-- footer section -->
+    @await Component.InvokeAsync("_UIFooterComponentPartial")
+
+    @await Component.InvokeAsync("_UIScriptComponentPartial")
+
+</body>
+
+</html>
