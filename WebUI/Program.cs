@@ -1,4 +1,10 @@
+using DataAccessLayer.Concrete.Contexts;
+using EntityLayer.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<SignalRContext>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<SignalRContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

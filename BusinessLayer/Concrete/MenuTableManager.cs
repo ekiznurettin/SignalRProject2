@@ -15,32 +15,32 @@ namespace BusinessLayer.Concrete
 
         public void TAdd(MenuTable Entity)
         {
-            throw new NotImplementedException();
+            _menuTableDal.Add(Entity);
         }
 
         public void TDelete(MenuTable Entity)
         {
-            throw new NotImplementedException();
+            _menuTableDal.Delete(Entity);
         }
 
         public List<MenuTable> TGetAll()
         {
-            throw new NotImplementedException();
+            return _menuTableDal.GetAll();
         }
 
         public MenuTable TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _menuTableDal.GetById(id);
         }
 
         public int TMenuTableCount()
         {
-           return _menuTableDal.MenuTableCount();
+            return _menuTableDal.MenuTableCount();
         }
 
         public void TUpdate(MenuTable Entity)
         {
-            throw new NotImplementedException();
+            _menuTableDal.Update(Entity);
         }
     }
 }

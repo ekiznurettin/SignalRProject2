@@ -11,11 +11,13 @@ namespace WebAPI.Controllers
     public class BasketsController : ControllerBase
     {
         private readonly IBasketService _basketService;
+        private readonly IProductService _productService;
         private readonly IMapper _mapper;
 
-        public BasketsController(IBasketService basketService, IMapper mapper)
+        public BasketsController(IBasketService basketService, IProductService productService, IMapper mapper)
         {
             _basketService = basketService;
+            _productService = productService;
             _mapper = mapper;
         }
 
@@ -34,8 +36,20 @@ namespace WebAPI.Controllers
         public IActionResult CreateBasket(CreateBasketDto createBasketDto)
         {
             var basket = _mapper.Map<Basket>(createBasketDto);
+            var product = _productService.TGetById(createBasketDto.ProductId);
+            basket.Price = product.Price;
+            basket.Count = 1;
+            basket.TotalPrice = 1 * product.Price;
+            basket.MenuTableId = 4;
             _basketService.TAdd(basket);
             return Ok();
+        }
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBasket(int id)
+        {
+            var value = _basketService.TGetById(id);
+            _basketService.TDelete(value);
+            return Ok("Silindi");
         }
     }
 }

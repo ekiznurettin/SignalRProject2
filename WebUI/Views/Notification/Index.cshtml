@@ -1,0 +1,48 @@
+﻿@model List<ResultNotificationDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Açıklama</th>
+                                <th scope="col">Tarih</th>
+                                <th scope="col">Durum</th>
+                                <th scope="col">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.Date</td>
+                                    <td>@item.Status</td>
+                                    <td>
+                                        <a asp-controller="Notification" asp-action="DeleteNotification" asp-route-id="@item.Id" class="btn btn-outline-danger">Sil</a>
+                                        <a asp-controller="Notification" asp-action="UpdateNotification" asp-route-id="@item.Id" class="btn btn-outline-success">Güncelle</a>
+                                        <a asp-controller="Notification" asp-action="StatusChangeToTrue" asp-route-id="@item.Id" class="btn btn-outline-success">Okundu</a>
+                                        <a asp-controller="Notification" asp-action="StatusChangeToFalse" asp-route-id="@item.Id" class="btn btn-outline-success">Okunmadı</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <a asp-controller="Notification" asp-action="CreateNotification" class="btn btn-outline-primary">Ekle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,41 @@
+﻿@model UpdateNotificationDto
+@{
+    ViewData["Title"] = "UpdateNotification";
+    Layout = "~/Views/Admin/Index.cshtml";
+}
+
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<form method="post" asp-controller="Notification" asp-action="UpdateNotification">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Yeni Bildirim Güncelle</div>
+						</div>
+						<div class="card-body">
+							<input type="hidden" asp-for="Id" />
+							<div class="form-group">
+								<label asp-for="Type">Bildirim Türü</label>
+								<input asp-for="Type" class="form-control" id="text" placeholder="Enter name">
+							</div>
+							<div class="form-group">
+								<label asp-for="Icon">Bildirim İcon</label>
+								<input asp-for="Icon" class="form-control" id="text" placeholder="Enter name">
+							</div>
+							<div class="form-group">
+								<label asp-for="Description">Bildirim Açıklama</label>
+								<input asp-for="Description" class="form-control" id="text" placeholder="Enter name">
+							</div>
+						</div>
+						<div class="card-action">
+							<button class="btn btn-primary">Bildirim Güncelle</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+

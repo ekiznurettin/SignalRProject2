@@ -3,42 +3,83 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Admin/Index.cshtml";
 }
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+
 <div class="content">
     <div class="container-fluid">
+
+        <script type="text/javascript">
+            $(document).ready(() => {
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7039/signalrhub").build();
+                $("#connstatus").text(connection.state);
+
+                connection.start().then(() => {
+                    $("#connstatus").text(connection.state);
+                    setInterval(() => {
+                        connection.invoke("GetBookingList");
+                    }, 1000);
+                }).catch((err) => {
+                    console.log(err)
+                });
+                connection.on("ReceiveBookingList", (value) => {
+                    $("#bookingList").empty();
+                    let tableHtml = `<table class=table mt-3
+                                         <thead>
+                                             <tr>
+                                                 <th scope="col">#</th>
+                                                 <th scope="col">Kategori Adı</th>
+                                                 <th scope="col">Telefon</th>
+                                                 <th scope="col">Mail</th>
+                                                 <th scope="col">Personel Sayısı</th>
+                                                 <th scope="col">Tarih</th>
+                                                 <th scope="col">İşlemler</th>
+                                             </tr>
+                                          </thead>
+                                             <tbody>`
+                    $.each(value, (index, item) => {
+                        tableHtml += `  <tr>
+                                            <td>${item.id}</td>
+                                            <td>${item.name}</td>
+                                            <td> ${item.phone} </td>
+                                            <td> ${item.mail} </td>
+                                            <td> ${item.personCount} </td>
+                                            <td> ${item.date} </td>
+                                            <td>
+                                                <a asp-controller="Booking" asp-action="DeleteCBooking" asp-route-id="${item.id}" class="btn btn-outline-danger">Sil</a>
+                                                <a asp-controller="Booking" asp-action="UpdateBooking" asp-route-id="${item.id}" class="btn btn-outline-success">Güncelle</a>
+                                            </td>
+                                        </tr>`
+                    });
+
+                    tableHtml += ` </tbody>
+                                </table>`;
+                    $("#bookingList").html(tableHtml);
+
+
+                    // value.forEach((item, index) => {
+                    //     $("#bookingList").append(`<li class = "list-group-item">${item.name}</li>`)
+                    // });
+                });
+
+            });
+        </script>
+
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Kategori Adı</th>
-                                <th scope="col">Telefon</th>
-                                <th scope="col">Mail</th>
-                                <th scope="col">Personel Sayısı</th>
-                                <th scope="col">Tarih</th>
-                                <th scope="col">İşlemler</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>@item.Id</td>
-                                    <td>@item.Name</td>
-                                    <td>@item.Phone</td>
-                                    <td>@item.Mail</td>
-                                    <td>@item.PersonCount</td>
-                                    <td>@item.Date.ToShortDateString()</td>
-                                    <td>
-                                        <a asp-controller="Booking" asp-action="DeleteCBooking" asp-route-id="@item.Id" class="btn btn-outline-danger">Sil</a>
-                                        <a asp-controller="Booking" asp-action="UpdateBooking" asp-route-id="@item.Id" class="btn btn-outline-success">Güncelle</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                    
+                    <div id="bookingList"></div>
+
                     <a asp-controller="Booking" asp-action="CreateBooking" class="btn btn-outline-primary">Ekle</a>
+                 @*    <div class="col-md-8">
+                        <ul class="list-group" id="bookingList">
+                        </ul>
+                    </div> *@
                 </div>
             </div>
         </div>

@@ -26,8 +26,10 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateBasket(CreateBasketDto createBasketDto)
+        public async Task<IActionResult> CreateBasket(int id)
         {
+            CreateBasketDto createBasketDto = new();
+            createBasketDto.ProductId = id;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBasketDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
