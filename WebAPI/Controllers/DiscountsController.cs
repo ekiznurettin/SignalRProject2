@@ -30,6 +30,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public IActionResult CreateDiscount(CreateDiscountDto createDiscountDto)
         {
+            createDiscountDto.Status = false;
             var discount = _mapper.Map<Discount>(createDiscountDto);
             _discountService.TAdd(discount);
             return Ok();
@@ -44,6 +45,7 @@ namespace WebAPI.Controllers
         [HttpPut]
         public IActionResult UpdateContact(UpdateDiscountDto updateDiscountDto)
         {
+            updateDiscountDto.Status = false;
             var discount = _mapper.Map<Discount>(updateDiscountDto);
             _discountService.TUpdate(discount);
             return Ok();
@@ -53,6 +55,18 @@ namespace WebAPI.Controllers
         {
             var value = _discountService.TGetById(id);
             return Ok(value);
+        }
+        [HttpGet("ChangeStatusToTrue/{id}")]
+        public IActionResult ChangeStatusToTrue(int id)
+        {
+            _discountService.TChangeStatusToTrue(id);
+            return Ok("Başarılı");
+        }
+        [HttpGet("ChangeStatusToFalse/{id}")]
+        public IActionResult ChangeStatusToFalse(int id)
+        {
+            _discountService.TChangeStatusToFalse(id);
+            return Ok("Başarılı");
         }
     }
 }

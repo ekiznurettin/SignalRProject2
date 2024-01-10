@@ -83,6 +83,7 @@ namespace WebAPI.Controllers
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
+            updateProductDto.Status = true;
             var product = _mapper.Map<Product>(updateProductDto);
             _productService.TUpdate(product);
             return Ok();

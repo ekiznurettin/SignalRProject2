@@ -27,6 +27,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDto createBookingDto)
         {
+            createBookingDto.Description = "Rezervasyon Alındı";
             var booking = _mapper.Map<Booking>(createBookingDto);
             _bookingService.TAdd(booking);
             return Ok();
@@ -50,6 +51,19 @@ namespace WebAPI.Controllers
         {
             var booking = _bookingService.TGetById(id);
             return Ok(booking);
+        }
+
+        [HttpGet("BookingStatusApproved/{id}")]
+        public IActionResult BookingStatusApproved(int id)
+        {
+            _bookingService.TBookingStatusApproved(id);
+            return Ok();
+        }
+        [HttpGet("BookingStatusCanceled/{id}")]
+        public IActionResult BookingStatusCanceled(int id)
+        {
+            _bookingService.TBookingStatusCanceled(id);
+            return Ok();
         }
     }
 }

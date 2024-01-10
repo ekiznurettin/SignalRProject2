@@ -36,6 +36,7 @@
                                                  <th scope="col">Telefon</th>
                                                  <th scope="col">Mail</th>
                                                  <th scope="col">Personel Sayısı</th>
+                                                 <th scope="col">Açıklama</th>
                                                  <th scope="col">Tarih</th>
                                                  <th scope="col">İşlemler</th>
                                              </tr>
@@ -43,16 +44,21 @@
                                              <tbody>`
                     $.each(value, (index, item) => {
                         tableHtml += `  <tr>
-                                            <td>${item.id}</td>
+                                            <th>${index+1}</th>
                                             <td>${item.name}</td>
                                             <td> ${item.phone} </td>
                                             <td> ${item.mail} </td>
                                             <td> ${item.personCount} </td>
+                                            <td> ${item.description} </td>
                                             <td> ${item.date} </td>
                                             <td>
-                                                <a asp-controller="Booking" asp-action="DeleteCBooking" asp-route-id="${item.id}" class="btn btn-outline-danger">Sil</a>
-                                                <a asp-controller="Booking" asp-action="UpdateBooking" asp-route-id="${item.id}" class="btn btn-outline-success">Güncelle</a>
-                                            </td>
+                                                   <div class="row">
+                                                       <a asp-controller="Booking" asp-action="DeleteCBooking" asp-route-id="${item.id}" class="btn btn-outline-danger">Sil</a>
+                                                       <a asp-controller="Booking" asp-action="UpdateBooking" asp-route-id="${item.id}" class="btn btn-outline-success">Güncelle</a>
+                                                       <a asp-controller="Booking" asp-action="BookingStatusApproved" asp-route-id="${item.id}" class="btn btn-outline-info">Onayla</a>
+                                                       <a asp-controller="Booking" asp-action="BookingStatusCanceled" asp-route-id="${item.id}" class="btn btn-outline-dark">İptal Et</a>
+                                                  </div>
+                                                </td>
                                         </tr>`
                     });
 

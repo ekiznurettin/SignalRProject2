@@ -18,6 +18,16 @@ namespace BusinessLayer.Concrete
             _discountDal.Add(Entity);
         }
 
+        public void TChangeStatusToFalse(int id)
+        {
+            _discountDal.ChangeStatusToFalse(id);
+        }
+
+        public void TChangeStatusToTrue(int id)
+        {
+            _discountDal.ChangeStatusToTrue(id);
+        }
+
         public void TDelete(Discount Entity)
         {
             _discountDal.Delete(Entity);

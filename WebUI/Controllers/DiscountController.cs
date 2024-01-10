@@ -81,5 +81,20 @@ namespace WebUI.Controllers
 			}
 			return View();
 		}
-	}
+        public async Task<IActionResult> ChangeStatusToTrue(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:7039/api/discounts/ChangeStatusToTrue/{id}");
+          
+            return RedirectToAction("Index");
+        }
+		
+		 public async Task<IActionResult> ChangeStatusToFalse(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            await client.GetAsync($"https://localhost:7039/api/discounts/ChangeStatusToFalse/{id}");
+
+            return RedirectToAction("Index");
+        }
+    }
 }
